@@ -5,6 +5,7 @@ services:
     build:
       context: ./app
       dockerfile: Dockerfile
+    image: rahilpacmann/x-clone:0.0.1
     container_name: x-clone
     hostname: x-clone
     depends_on:
