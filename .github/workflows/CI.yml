@@ -33,10 +33,15 @@ jobs:
               run: |
                 sudo docker compose up --build --detach
 
-            - name: Test Hit Endpoint
+            - name: Test Hit App Endpoint
               run: |
                 sleep 20
                 curl http://localhost:5000/
+            
+            - name: Test Hit Mongo Express Endpoint
+              run: |
+                sleep 20
+                curl http://localhost:8081/
 
             - name: Install Testing requirements
               run: pip install -r tests/requirements.txt
