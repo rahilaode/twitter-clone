@@ -42,4 +42,4 @@ jobs:
               run: pip install -r tests/requirements.txt
               
             - name: Testing
-              run: python3 testing/test.py
+              run: python3 testing/main_test.py
