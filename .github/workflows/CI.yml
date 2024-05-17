@@ -1,0 +1,45 @@
+# This workflow will run automation build and testing development app.
+# Triggers : PR to Main
+# Jobs : Build and Testing
+name: Dev Testing 🔎
+
+on:
+  pull_request:
+    branches: ["main"]
+
+jobs:
+    build-testing:
+        name: Build and Testing
+        runs-on: ubuntu-latest
+        environment: development
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v2
+
+            - name: Create .env file for apps
+              run: |
+                echo "MONGO_URI=${{ secrets.MONGO_URI_DEV }}" >> ./app/.env
+                echo "PORT=5000" >> ./app/.env
+                echo "JWT_SECRET=`openssl rand -base64 32`" >> ./app/.env
+                echo "NODE_ENV=development" >> ./app/.env
+            
+            - name: Create .env file for docker compose
+              run: |
+                echo "MONGO_USER=${{ secrets.MONGO_USER_DEV }}" >> .env
+                echo "MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD_DEV }}" >> .env
+                echo "MONGO_URI=${{ secrets.MONGO_URI_DEV }}" >> .env
+            
+            - name: Run apps
+              run: |
+                sudo docker compose up --build --detach
+
+            - name: Test Hit Endpoint
+              run: |
+                sleep 20
+                curl http://localhost:5000/
+
+            - name: Install Testing requirements
+              run: pip install -r tests/requirements.txt
+              
+            - name: Testing
+              run: python3 testing/test.py
