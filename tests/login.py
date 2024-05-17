@@ -8,7 +8,9 @@ import time
 class LoginPage:
     def __init__(self):
         chrome_options = Options()
+        chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--disable-dev-shn-usage")
 
         self.driver = webdriver.Chrome(service = Service(ChromeDriverManager().install()),
                                        options = chrome_options)
