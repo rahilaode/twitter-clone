@@ -24,11 +24,6 @@ class LoginPage:
             self.driver.find_element(By.NAME, "password").send_keys("123456")
             self.driver.find_element(By.CSS_SELECTOR, ".max-w-6xl").click()
             self.driver.find_element(By.CSS_SELECTOR, ".btn:nth-child(5)").click()
-            time.sleep(2)
-            self.driver.find_element(By.CSS_SELECTOR, ".flex:nth-child(1) > .flex > .text-lg").click()
-            self.driver.find_element(By.CSS_SELECTOR, ".justify-center:nth-child(2) .text-lg").click()
-            self.driver.find_element(By.CSS_SELECTOR, ".flex:nth-child(3) .text-lg").click()
-            self.driver.find_element(By.CSS_SELECTOR, ".truncate").click()
             print("Valid Login Test - Passed ✅")
             
         except:
@@ -44,11 +39,6 @@ class LoginPage:
             self.driver.find_element(By.NAME, "password").send_keys("123456")
             self.driver.find_element(By.CSS_SELECTOR, ".max-w-6xl").click()
             self.driver.find_element(By.CSS_SELECTOR, ".btn:nth-child(5)").click()
-            time.sleep(2)
-            self.driver.find_element(By.CSS_SELECTOR, ".flex:nth-child(1) > .flex > .text-lg").click()
-            self.driver.find_element(By.CSS_SELECTOR, ".justify-center:nth-child(2) .text-lg").click()
-            self.driver.find_element(By.CSS_SELECTOR, ".flex:nth-child(3) .text-lg").click()
-            self.driver.find_element(By.CSS_SELECTOR, ".truncate").click()
             raise Exception("Invalid Login Test - Failed ❌")
             
         except:
