@@ -1,15 +1,19 @@
-from signup import SignupPage
-from login import LoginPage
+from signup import valid_signup, invalid_signup
+from login import valid_login, invalid_login
+
+
+def test(unit, unit_name):
+    if unit == True:
+        print(f"{unit_name} Test - Passed ✅")
+        
+    else:
+        raise Exception(f"{unit_name} Test - Failed ❌")
 
 if __name__ == "__main__":
     # Signup page test
-    signup_page_test = SignupPage()
-    signup_page_test.valid_signup()
-    signup_page_test.invalid_signup()
-    signup_page_test.driver.quit()
+    test(unit = valid_signup(), unit_name = "Valid Signup")
+    test(unit = invalid_signup(), unit_name = "Invalid Signup")
     
     # Login page test
-    login_page_test = LoginPage()
-    login_page_test.valid_login()
-    login_page_test.invalid_login()
-    login_page_test.driver.quit()
+    test(unit = valid_login(), unit_name = "Valid Login")
+    test(unit = invalid_login(), unit_name = "Invalid Login")

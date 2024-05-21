@@ -1,49 +1,50 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
+from utils.driver import chrome_driver
 
-class SignupPage:
-    def __init__(self):
-        chrome_options = Options()
-        chrome_options.add_argument("--no-sandbox")
-        chrome_options.add_argument("--headless")
-        chrome_options.add_argument("--disable-dev-shn-usage")
-
-        self.driver = webdriver.Chrome(service = Service(ChromeDriverManager().install()),
-                                       options = chrome_options)
-    def valid_signup(self):
-        try:
-            self.driver.get("http://localhost:5000/signup")
-            self.driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/label/input").click()
-            self.driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/label/input").send_keys("xyz@gmail.com")
-            self.driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/div/label/input").click()
-            self.driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/div/label/input").send_keys("xyz")
-            self.driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/div/label[2]/input").click()
-            self.driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/div/label[2]/input").send_keys("xyzabc")
-            self.driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/label[2]").click()
-            self.driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/label[2]/input").send_keys("123456")
-            self.driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/button").click()
-            print("Valid Signup Test - Passed ✅")
-            
-        except:
-            raise Exception("Valid Signup Test - Failed ❌")
+def valid_signup():    
+    try:
+        driver = chrome_driver()
+        driver.get("http://localhost:5000/signup")
+        driver.find_element(By.XPATH, "//input[@name=\'email\']").click()
+        driver.find_element(By.XPATH, "//input[@name=\'email\']").send_keys("xyz@gmail.com")
+        driver.find_element(By.XPATH, "//input[@name=\'username\']").click()
+        driver.find_element(By.XPATH, "//input[@name=\'username\']").send_keys("xyzabc")
+        driver.find_element(By.XPATH, "//input[@name=\'fullName\']").click()
+        driver.find_element(By.XPATH, "//input[@name=\'fullName\']").send_keys("xyzabc")
+        driver.find_element(By.XPATH, "//input[@name=\'password\']").click()
+        driver.find_element(By.XPATH, "//input[@name=\'password\']").send_keys("123456")
+        driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/button").click()
+        driver.implicitly_wait(10)
+        driver.find_element(By.XPATH, "//span[contains(.,\'Home\')]").click()
+        driver.find_element(By.XPATH, "//span[contains(.,\'Notifications\')]").click()
+        driver.find_element(By.XPATH, "//span[contains(.,\'Profile\')]").click()
+        driver.quit()
         
-    def invalid_signup(self):
-        try:
-            self.driver.get("http://localhost:5000/signup")
-            self.driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/label/input").click()
-            self.driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/label/input").send_keys("xyzgmail.com") # Test remove @ sign
-            self.driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/div/label/input").click()
-            self.driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/div/label/input").send_keys("xyz")
-            self.driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/div/label[2]/input").click()
-            self.driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/div/label[2]/input").send_keys("xyzabc")
-            self.driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/label[2]").click()
-            self.driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/label[2]/input").send_keys("123456")
-            self.driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/button").click()
-            raise Exception("Invalid Signup Test - Failed ❌")
-            
-        except:
-            print("Invalid Signup Test - Passed ✅")
+        return True
+        
+    except:
+        return False
+        
+def invalid_signup():
+    try:
+        driver = chrome_driver()
+        driver.get("http://localhost:5000/signup")
+        driver.find_element(By.XPATH, "//input[@name=\'email\']").click()
+        driver.find_element(By.XPATH, "//input[@name=\'email\']").send_keys("xyzaagmail.com") # Try don't use @ sign
+        driver.find_element(By.XPATH, "//input[@name=\'username\']").click()
+        driver.find_element(By.XPATH, "//input[@name=\'username\']").send_keys("xyza")
+        driver.find_element(By.XPATH, "//input[@name=\'fullName\']").click()
+        driver.find_element(By.XPATH, "//input[@name=\'fullName\']").send_keys("xyza")
+        driver.find_element(By.XPATH, "//input[@name=\'password\']").click()
+        driver.find_element(By.XPATH, "//input[@name=\'password\']").send_keys("123456")
+        driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/button").click()
+        driver.implicitly_wait(10)
+        driver.find_element(By.XPATH, "//span[contains(.,\'Home\')]").click()
+        driver.find_element(By.XPATH, "//span[contains(.,\'Notifications\')]").click()
+        driver.find_element(By.XPATH, "//span[contains(.,\'Profile\')]").click()
+        driver.quit()
+        
+        return False
     
+    except:
+        return True
