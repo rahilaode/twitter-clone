@@ -5,6 +5,7 @@ def valid_signup():
     try:
         driver = chrome_driver()
         driver.get("http://localhost:5000/signup")
+        driver.implicitly_wait(30)
         driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/label/input").click()
         driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/label/input").send_keys("xyz@gmail.com")
         driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/div/label/input").click()
@@ -29,6 +30,7 @@ def invalid_signup():
     try:
         driver = chrome_driver()
         driver.get("http://localhost:5000/signup")
+        driver.implicitly_wait(30)
         driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/label/input").click()
         driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/label/input").send_keys("xyzagmail.com") # Try don't use @ sign
         driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/div/label/input").click()
