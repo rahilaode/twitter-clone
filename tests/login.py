@@ -11,10 +11,10 @@ def valid_login():
         driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/label[2]/input").click()
         driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/label[2]/input").send_keys("123456")
         driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/button").click()
-        # driver.implicitly_wait(60)
-        # driver.find_element(By.XPATH, "//span[contains(.,\'Home\')]").click()
-        # driver.find_element(By.XPATH, "//span[contains(.,\'Notifications\')]").click()
-        # driver.find_element(By.XPATH, "//span[contains(.,\'Profile\')]").click()
+        driver.implicitly_wait(60)
+        driver.find_element(By.XPATH, "//span[contains(.,\'Home\')]").click()
+        driver.find_element(By.XPATH, "//span[contains(.,\'Notifications\')]").click()
+        driver.find_element(By.XPATH, "//span[contains(.,\'Profile\')]").click()
         driver.quit()
         
         return True
@@ -32,10 +32,10 @@ def invalid_login():
         driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/label[2]/input").click()
         driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/label[2]/input").send_keys("123456")
         driver.find_element(By.XPATH, "//div[@id=\'root\']/div/div/div[2]/form/button").click()
-        # driver.implicitly_wait(60)
-        # driver.find_element(By.XPATH, "//span[contains(.,\'Home\')]").click()
-        # driver.find_element(By.XPATH, "//span[contains(.,\'Notifications\')]").click()
-        # driver.find_element(By.XPATH, "//span[contains(.,\'Profile\')]").click()
+        driver.implicitly_wait(60)
+        driver.find_element(By.XPATH, "//span[contains(.,\'Home\')]").click()
+        driver.find_element(By.XPATH, "//span[contains(.,\'Notifications\')]").click()
+        driver.find_element(By.XPATH, "//span[contains(.,\'Profile\')]").click()
         driver.quit()
         
         return False
