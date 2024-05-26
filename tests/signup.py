@@ -2,6 +2,15 @@ from selenium.webdriver.common.by import By
 from utils.driver import chrome_driver
 
 def valid_signup():    
+    """
+    Attempts a valid signup using valid credentials.
+    This function simulates a user signing up with valid credentials.
+    It navigates to the signup page, inputs the correct username and password, and submits the form.
+    After signing up, it navigates through several pages to ensure the signup was successful.
+    If any step fails, it will handle the exception and return False indicating the test failed.
+    Returns:
+        bool: True if the signup was successful, False otherwise.
+    """
     try:
         driver = chrome_driver()
         driver.get("http://localhost:5000/signup")
@@ -27,6 +36,15 @@ def valid_signup():
         return False
         
 def invalid_signup():
+    """
+    Attempts an invalid signup using invalid credentials.
+    This function simulates a user signing up with invalid credentials.
+    It navigates to the signup page, inputs the incorrect username and password, and submits the form.
+    The function checks if the signup attempt fails as expected and returns True if it does,
+    indicating the test passed. If the signup unexpectedly succeeds, it returns False.
+    Returns:
+        bool: True if the invalid signup test passed (signup failed), False otherwise.
+    """
     try:
         driver = chrome_driver()
         driver.get("http://localhost:5000/signup")
