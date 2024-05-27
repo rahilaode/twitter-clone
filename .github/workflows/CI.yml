@@ -31,7 +31,7 @@ jobs:
             
             - name: Run apps
               run: |
-                sudo docker compose up --file docker-compose.dev.yml --build --detach
+                sudo docker compose --file docker-compose.dev.yaml up --build --detach
 
             - name: Test Hit App Endpoint
               run: |
