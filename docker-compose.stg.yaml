@@ -1,8 +1,10 @@
 version: '3'
 
 services:
-  x-clone-prod:
-    image: "${APP_IMAGE}:${APP_TAG}"
+  x-clone-stg:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
     container_name: x-clone
     hostname: x-clone
     restart: unless-stopped
