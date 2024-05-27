@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  x-clone:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    image: rahilpacmann/x-clone:0.0.1
+    container_name: x-clone
+    hostname: x-clone
+    restart: unless-stopped
+    ports:
+      - 5000:5000
+    networks:
+      - x_net
+
+networks:
+  x_net:
+    driver: bridge
+    name: x_net
