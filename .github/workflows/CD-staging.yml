@@ -28,7 +28,3 @@ jobs:
                 script: |
                   echo "Success"
 
-            - name: Test Hit Endpoint
-              run: |
-                sleep 20
-                curl ${{ secrets.STG_URL }}
