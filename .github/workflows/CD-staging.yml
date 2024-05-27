@@ -27,4 +27,6 @@ jobs:
                 envs: GIT_URL, MONGO_URI, NODE_ENV
                 script: |
                   echo "Success"
+                  echo $GIT_URL
+                  echo $NODE_ENV
 
