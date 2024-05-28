@@ -31,12 +31,11 @@ jobs:
                     sudo docker compose --file docker-compose.stg.yaml down
                     git pull origin main
                   else
-                    ssh-keyscan github.com > ~/.ssh/known_hosts
                     git clone $GIT_URL /home/ubuntu/x-clone
                     cd /home/ubuntu/x-clone
                   fi
 
-                  echo "MONGO_URI=$MONGO_URI" >> ./app/.env
+                  echo "MONGO_URI=$MONGO_URI" > ./app/.env
                   echo "PORT=5000" >> ./app/.env
                   echo "JWT_SECRET=`openssl rand -base64 32`" >> ./app/.env
                   echo "NODE_ENV=$NODE_ENV" >> ./app/.env
