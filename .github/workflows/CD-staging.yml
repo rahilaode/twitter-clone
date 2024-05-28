@@ -31,6 +31,7 @@ jobs:
                     sudo docker compose --file docker-compose.stg.yaml down
                     git pull origin main
                   else
+                    ssh-keyscan github.com > ~/.ssh/known_hosts
                     git clone $GIT_URL /home/ubuntu/x-clone
                     cd /home/ubuntu/x-clone
                   fi
