@@ -42,6 +42,7 @@ jobs:
 
               echo "MONGO_URI_PROD=$MONGO_URI_PROD" > .env
               echo "APP_PORT=$APP_PORT" >> .env
+              echo "NODE_ENV_PROD=$NODE_ENV_PROD" >> .env
               echo "JWT_SECRET_PROD=`openssl rand -base64 32`" >> .env
               echo "APP_IMAGE=$APP_IMAGE" >> .env
               echo "APP_TAG=$APP_TAG" >> .env
