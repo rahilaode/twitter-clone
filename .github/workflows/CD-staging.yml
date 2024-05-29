@@ -39,7 +39,7 @@ jobs:
                   
                   echo "APP_PORT=$APP_PORT" > .env
                   echo "MONGO_URI_STG=$MONGO_URI_STG" >> .env
-                  echo "JWT_SECRET_STG=`openssl rand -base64 32`" > .env
+                  echo "JWT_SECRET_STG=`openssl rand -base64 32`" >> .env
                   echo "NODE_ENV_STG=$NODE_ENV_STG" >> .env
 
                   sudo docker compose --file docker-compose.stg.yaml up --build --detach
