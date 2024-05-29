@@ -16,15 +16,16 @@ jobs:
             - name: Execute deployment command
               uses: appleboy/ssh-action@v1.0.3
               env:
+                APP_PORT: ${{ secrets.APP_PORT }}
+                MONGO_URI_STG: ${{ secrets.MONGO_URI_STG }}
+                NODE_ENV_STG: ${{ vars.NODE_ENV_STG }}
                 GIT_URL: ${{ secrets.GIT_URL }}
-                MONGO_URI: ${{ secrets.MONGO_URI_STG }}
-                NODE_ENV: ${{ vars.NODE_ENV }}"
                 
               with:
                 host: ${{ secrets.SSH_HOST_STAGING }}
                 username: ${{ secrets.SSH_USER_NAME_STAGING }}
                 key: ${{ secrets.SSH_PRIVATE_KEY_STAGING }}
-                envs: GIT_URL, MONGO_URI, NODE_ENV
+                envs: APP_PORT, MONGO_URI_STG, NODE_ENV_STG, GIT_URL
                 script: |
                   if [[ -d "/home/ubuntu/x-clone" ]]; then 
                     cd /home/ubuntu/x-clone
@@ -35,11 +36,11 @@ jobs:
                     git clone $GIT_URL /home/ubuntu/x-clone
                     cd /home/ubuntu/x-clone
                   fi
-
-                  echo "MONGO_URI=$MONGO_URI" > ./app/.env
-                  echo "PORT=5000" >> ./app/.env
-                  echo "JWT_SECRET=`openssl rand -base64 32`" >> ./app/.env
-                  echo "NODE_ENV=$NODE_ENV" >> ./app/.env
+                  
+                  echo "APP_PORT=$APP_PORT" > .env
+                  echo "MONGO_URI_STG=$MONGO_URI_STG" >> .env
+                  echo "JWT_SECRET_STG=`openssl rand -base64 32`" > .env
+                  echo "NODE_ENV_STG=$NODE_ENV_STG" >> .env
 
                   sudo docker compose --file docker-compose.stg.yaml up --build --detach
 

@@ -15,19 +15,15 @@ jobs:
         steps:
             - name: Checkout repository
               uses: actions/checkout@v2
-
-            - name: Create .env file for apps
-              run: |
-                echo "MONGO_URI=${{ secrets.MONGO_URI_DEV }}" >> ./app/.env
-                echo "PORT=5000" >> ./app/.env
-                echo "JWT_SECRET=`openssl rand -base64 32`" >> ./app/.env
-                echo "NODE_ENV=development" >> ./app/.env
             
-            - name: Create .env file for docker compose
+            - name: Create .env file
               run: |
-                echo "MONGO_USER=${{ secrets.MONGO_USER_DEV }}" >> .env
-                echo "MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD_DEV }}" >> .env
-                echo "MONGO_URI=${{ secrets.MONGO_URI_DEV }}" >> .env
+                echo "APP_PORT=${{ secrets.APP_PORT }}" > .env
+                echo "NODE_ENV_DEV=${{ vars.NODE_ENV_DEV }}" >> .env
+                echo "MONGO_USER_DEV=${{ secrets.MONGO_USER_DEV }}" >> .env
+                echo "MONGO_PASSWORD_DEV=${{ secrets.MONGO_PASSWORD_DEV }}" >> .env
+                echo "MONGO_URI_DEV=${{ secrets.MONGO_URI_DEV }}" >> .env
+                echo "JWT_SECRET_DEV=`openssl rand -base64 32`" >> .env
             
             - name: Run apps
               run: |
