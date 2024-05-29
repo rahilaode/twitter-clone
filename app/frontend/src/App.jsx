@@ -15,11 +15,15 @@ import LoadingSpinner from "./components/common/LoadingSpinner";
 
 function App() {
 	const { data: authUser, isLoading } = useQuery({
-		// we use queryKey to give a unique name to our query and refer to it later
 		queryKey: ["authUser"],
 		queryFn: async () => {
 			try {
-				const res = await fetch("/api/auth/me");
+				const token = localStorage.getItem('token'); // Assuming the token is stored in localStorage
+				const res = await fetch("/api/auth/me", {
+					headers: {
+						'Authorization': `Bearer ${token}`  // Include the token in the Authorization header
+					}
+				});
 				const data = await res.json();
 				if (data.error) return null;
 				if (!res.ok) {
