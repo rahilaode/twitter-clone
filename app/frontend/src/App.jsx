@@ -19,7 +19,11 @@ function App() {
 		queryKey: ["authUser"],
 		queryFn: async () => {
 			try {
-				const res = await fetch("/api/auth/me");
+				const res = await fetch("/api/auth/me", {
+					headers: {
+						'Authorization': `Bearer ${localStorage.getItem('token')}`, // Assuming the token is stored in localStorage
+					}
+				});
 				const data = await res.json();
 				if (data.error) return null;
 				if (!res.ok) {
