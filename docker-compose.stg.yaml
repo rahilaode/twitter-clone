@@ -7,9 +7,14 @@ services:
       dockerfile: Dockerfile
     container_name: x-clone
     hostname: x-clone
+    environment:
+      - MONGO_URI=${MONGO_URI_STG}
+      - PORT=${APP_PORT}
+      - JWT_SECRET=${JWT_SECRET_STG}
+      - NODE_ENV=${NODE_ENV_STG}
     restart: unless-stopped
     ports:
-      - 5000:5000
+      - ${APP_PORT}:${APP_PORT}
     networks:
       - x_net
 

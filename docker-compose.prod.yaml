@@ -5,9 +5,14 @@ services:
     image: "${APP_IMAGE}:${APP_TAG}"
     container_name: x-clone
     hostname: x-clone
+    environment:
+      - MONGO_URI=${MONGO_URI_PROD}
+      - PORT=${APP_PORT}
+      - JWT_SECRET=${JWT_SECRET_PROD}
+      - NODE_ENV=${NODE_ENV_PROD}
     restart: unless-stopped
     ports:
-      - 5000:5000
+      - ${APP_PORT}:${APP_PORT}
     networks:
       - x_net
 
